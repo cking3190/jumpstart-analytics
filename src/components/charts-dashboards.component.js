@@ -1,53 +1,89 @@
 import React from "react";
 
 // Material UI
-import { Container, Grid, Paper } from "@mui/material";
+import { Container, Grid, Paper, Typography } from "@mui/material";
 
 // Custom Components
 import Chart from "./chart.component";
+import RegionSelect from "./select-region.component";
+const topStyle = {
+  height: "200px",
+  width: "500px",
+};
+const midStyle = {
+  height: "500px",
+  width: "1250px",
+};
+
+const midMapStyle = {
+  height: "300px",
+  width: "600px",
+};
+const midChartHeight = "300px";
+const midChartWidth = "600px";
+
+const topChartHeight = "200px";
+const topChartWidth = "500px";
 
 const DashboardContainer = () => {
+  const [filter, setFilter] = React.useState("All");
+
+  const handleChange = (region) => {
+    setFilter(region);
+  };
+
   return (
-    <Container sx={{ height: "80vh" }}>
-      <Grid
-        container
-        spacing={3}
-        direction="column"
-        align="center"
-        justify="center"
-      >
-        <Grid
-          container
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
-          spacing={2}
-        >
-          <Grid xs={6}>
-            <Paper elevation={2}>Area 1</Paper>
-          </Grid>
-          <Grid xs={6}>
-            <Paper elevation={2}>
-              {" "}
-              <Chart
-                height="600px"
-                width="800px"
-                chartId="63640706-fe58-4822-8c75-dd9a83bb5771"
-              />
-            </Paper>
-          </Grid>
-        </Grid>
-        <Grid container>
-          <Paper elevation={2}>
-            <Chart
-              height="600px"
-              width="800px"
-              chartId="63640706-fe58-4822-8c75-dd9a83bb5771"
-            />
-          </Paper>
-        </Grid>
+    <Grid
+      container
+      spacing={3}
+      sx={{ overflowY: "scroll", height: "75vh" }}
+      direction="row"
+      align="center"
+      justify="center"
+    >
+      <Grid item xs={6}>
+        <RegionSelect onChange={handleChange} />
       </Grid>
-    </Container>
+      <Grid item xs={6}></Grid>
+      <Grid item xs={6}>
+        <Paper sx={topStyle} elevation={4}>
+          <Chart
+            height={topChartHeight}
+            width={topChartWidth}
+            chartId="64781004-8f75-49ef-8336-7292d88d48b6"
+          />
+        </Paper>
+      </Grid>
+      <Grid item xs={6}>
+        <Paper sx={topStyle} elevation={4}>
+          <Chart
+            height={topChartHeight}
+            width={topChartWidth}
+            chartId="0c7d6841-f4c7-48b4-b31f-d940266449bc"
+          />
+        </Paper>
+      </Grid>
+      <Grid item xs={6}>
+        <Paper style={midMapStyle} elevation={4}>
+          <Chart
+            height={midChartHeight}
+            width={midChartWidth}
+            chartId="64781004-8f75-4594-87de-7292d88d48ba"
+            filter={filter == "All" ? null : { state: filter }}
+          />
+        </Paper>
+      </Grid>
+      <Grid item xs={6}>
+        <Paper style={midMapStyle} elevation={4}>
+          <Chart
+            height={midChartHeight}
+            width={midChartWidth}
+            chartId="09e12a46-9e04-4bd9-b77f-2e9dc82c08d1"
+            filter={filter == "All" ? null : { state: filter }}
+          />
+        </Paper>
+      </Grid>
+    </Grid>
   );
 };
 

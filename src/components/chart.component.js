@@ -12,7 +12,7 @@ const Chart = ({ filter, chartId, height, width }) => {
       chartId: chartId,
       height: height,
       width: width,
-      theme: "dark",
+      theme: "light",
     })
   );
 

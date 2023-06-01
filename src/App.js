@@ -2,8 +2,17 @@ import logo from "./logo.svg";
 import "./App.css";
 import CssBaseline from "@mui/material/CssBaseline";
 import DashboardContainer from "./components/charts-dashboards.component";
+import ResponsiveAppBar from "./components/navbar.component";
+import { BrowserRouter as Router } from "react-router-dom";
 
-import { Grid, CircularProgress, useTheme } from "@mui/material";
+import {
+  Grid,
+  CircularProgress,
+  useTheme,
+  Typography,
+  AppBar,
+} from "@mui/material";
+import PageRouter from "./components/page-router.component";
 
 function App() {
   return (
@@ -11,37 +20,31 @@ function App() {
       className="App"
       // style={{ backgroundColor: theme.palette.background.default }}
     >
-      <CssBaseline />
-      <Grid
-        style={{
-          height: "100vh",
-          width: "100%",
-          marginLeft: "0px",
-        }}
-        container
-        spacing={2}
-      >
+      <Router>
+        <ResponsiveAppBar />
+        <CssBaseline />
         <Grid
-          item
+          style={{
+            width: "100%",
+            marginLeft: "0px",
+          }}
           container
-          xs
-          sm
-          direction="column"
           spacing={2}
-          justifyContent="space-between"
-          style={{ marginLeft: "0px" }}
         >
-          <Grid item container>
-            <Grid item sm={12}>
-              {/* <Header /> */}
-              Header
-            </Grid>
-          </Grid>
-          <Grid item container>
-            <DashboardContainer></DashboardContainer>
+          <Grid
+            item
+            container
+            xs
+            sm
+            direction="column"
+            spacing={2}
+            justifyContent="space-between"
+            style={{ marginTop: "20px" }}
+          >
+            <PageRouter></PageRouter>
           </Grid>
         </Grid>
-      </Grid>
+      </Router>
     </div>
   );
 }
